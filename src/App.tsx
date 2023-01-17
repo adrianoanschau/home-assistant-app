@@ -4,6 +4,7 @@ import { ColorModeContext, useMode } from "./theme";
 import Topbar from "./scenes/global/topbar";
 import Sidebar from "./scenes/global/sidebar";
 import Dashboard from "./scenes/dashboard";
+import Incomes from "./scenes/incomes";
 
 export default () => {
   const [theme, colorMode] = useMode();
@@ -18,6 +19,7 @@ export default () => {
             <Topbar />
             <Routes>
               <Route path="/" element={<Dashboard />} />
+              <Route path="/incomes" element={<Incomes />} />
             </Routes>
           </main>
         </div>

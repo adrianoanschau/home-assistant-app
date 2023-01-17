@@ -1,61 +1,148 @@
 import { useState } from "react";
-import { Box, useTheme } from "@mui/material";
+import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import {
   Sidebar as ProSidebar,
   Menu,
   MenuItem,
-  SubMenu,
   useProSidebar,
-  sidebarClasses,
+  menuClasses,
 } from "react-pro-sidebar";
+import {
+  MenuOutlined as MenuIcon,
+  HomeOutlined as HomeIcon,
+  PaidOutlined as IncomesIcon,
+} from "@mui/icons-material";
+import { Link } from "react-router-dom";
 import { tokens } from "../../theme";
+
+type ItemProps = {
+  title: string;
+  to: string;
+  icon: React.ReactNode;
+  selected: string;
+  setSelected: (title: string) => void;
+};
+
+const Item = ({ title, to, icon, selected, setSelected }: ItemProps) => {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+
+  return (
+    <MenuItem
+      component={<Link to={to} />}
+      active={selected === title}
+      icon={icon}
+      style={{ color: colors.grey[100] }}
+      onClick={() => setSelected(title)}
+    >
+      <Typography>{title}</Typography>
+    </MenuItem>
+  );
+};
 
 const Sidebar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const { collapseSidebar } = useProSidebar();
+  const { collapsed, collapseSidebar } = useProSidebar();
   const [selected, setSelected] = useState("Dashboard");
 
   return (
-    <Box
-    // sx={{
-    //   "& .ps-sidebar-container": {
-    //     background: `${colors.primary[400]} !important`,
-    //   },
-    //   "& .ps-icon-wrapper": {
-    //     backgroundColor: `transparent !important`,
-    //   },
-    //   "& .ps-inner-item": {
-    //     padding: `5px 35px 5px 20px !important`,
-    //   },
-    //   "& .ps-inner-item:hover": {
-    //     color: `#868dfb !important`,
-    //   },
-    //   "& .ps-menu-item.active": {
-    //     color: `#6870fa !important`,
-    //   },
-    // }}
-    >
+    <Box sx={{ display: "flex" }}>
       <ProSidebar
+        backgroundColor={colors.primary[400]}
+        width="300px"
         rootStyles={{
-          [`.${sidebarClasses.root}`]: {
-            height: "100%",
+          border: "none !important",
+          [`.${menuClasses.button}`]: {
+            backgroundColor: `transparent !important`,
+            padding: `5px 35px 5px 20px !important`,
+            "&:hover": {
+              color: `#868dfb !important`,
+            },
           },
-          [`.${sidebarClasses.container}`]: {
-            background: `${colors.primary[400]} !important`,
+          [`.${menuClasses.active}`]: {
+            color: `#6870fa !important`,
           },
         }}
       >
         <Menu>
-          <SubMenu label="Charts">
-            <MenuItem> Pie charts </MenuItem>
-            <MenuItem> Line charts </MenuItem>
-          </SubMenu>
-          <MenuItem> Documentation </MenuItem>
-          <MenuItem> Calendar </MenuItem>
+          <MenuItem
+            icon={collapsed ? <MenuIcon /> : undefined}
+            onClick={() => collapseSidebar(!collapsed)}
+            style={{
+              margin: `10px 0 20px 0`,
+              color: colors.grey[100],
+            }}
+          >
+            {!collapsed && (
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <Typography variant="h3" color={colors.grey[100]}>
+                  HOME ASSISTANT
+                </Typography>
+                <IconButton onClick={() => collapseSidebar()}>
+                  <MenuIcon />
+                </IconButton>
+              </Box>
+            )}
+          </MenuItem>
+
+          {!collapsed && (
+            <Box mb="25px">
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <img
+                  alt="profile-user"
+                  width="100px"
+                  height="100px"
+                  src={`../../assets/user.jpg`}
+                  style={{ cursor: "pointer", borderRadius: "50%" }}
+                />
+              </Box>
+              <Box sx={{ textAlign: "center" }}>
+                <Typography
+                  variant="h2"
+                  color={colors.grey[100]}
+                  fontWeight="bold"
+                  sx={{ m: `10px 0 0 0 ` }}
+                >
+                  Adriano Anschau
+                </Typography>
+                <Typography variant="h5" color={colors.greenAccent[500]}>
+                  VP Admin
+                </Typography>
+              </Box>
+            </Box>
+          )}
+
+          <Box>
+            <Item
+              title="Dashboard"
+              to="/"
+              icon={<HomeIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Receitas"
+              to="/incomes"
+              icon={<IncomesIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+          </Box>
         </Menu>
       </ProSidebar>
-      <button onClick={() => collapseSidebar()}>Collapse</button>
     </Box>
   );
 };
