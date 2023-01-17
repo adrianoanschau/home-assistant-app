@@ -5,12 +5,16 @@ import {
   GridRowsProp,
   GridToolbar,
 } from "@mui/x-data-grid";
+import { useAxios } from "../../api/hooks/use-axios";
 import { Header } from "../../components";
 import { tokens } from "../../theme";
 
 const Incomes = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const { data } = useAxios(`http://localhost:3000/api/estimated_incomes`);
+  console.log(data);
+
   const rows: GridRowsProp = [
     { id: 1, description: "Salário", "jan/23": 2000 },
   ];
