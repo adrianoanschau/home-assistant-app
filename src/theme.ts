@@ -3,8 +3,29 @@ import { createTheme, ThemeOptions } from "@mui/material/styles";
 import { PaletteMode } from "@mui/material";
 import { Theme } from "@emotion/react";
 
+export type PaletteColor = {
+  100: string;
+  200: string;
+  300: string;
+  400: string;
+  500: string;
+  600: string;
+  700: string;
+  800: string;
+  900: string;
+};
+
+export type Palette = {
+  grey: PaletteColor;
+  primary: PaletteColor;
+  greenAccent: PaletteColor;
+  redAccent: PaletteColor;
+  blueAccent: PaletteColor;
+  orangeAccent: PaletteColor;
+};
+
 // color design tokens
-export const tokens = (mode: PaletteMode) => ({
+export const tokens = (mode: PaletteMode): Palette => ({
   ...(mode === "dark"
     ? {
         grey: {
@@ -52,15 +73,26 @@ export const tokens = (mode: PaletteMode) => ({
           900: "#2c100f",
         },
         blueAccent: {
-          100: "#e1e2fe",
-          200: "#c3c6fd",
-          300: "#a4a9fc",
-          400: "#868dfb",
-          500: "#6870fa",
-          600: "#535ac8",
-          700: "#3e4396",
-          800: "#2a2d64",
-          900: "#151632",
+          100: "#d1e9ff",
+          200: "#a3d3ff",
+          300: "#74bcff",
+          400: "#46a6ff",
+          500: "#1890ff",
+          600: "#1373cc",
+          700: "#0e5699",
+          800: "#0a3a66",
+          900: "#051d33",
+        },
+        orangeAccent: {
+          100: "#fadfd0",
+          200: "#f5c0a0",
+          300: "#f1a071",
+          400: "#ec8141",
+          500: "#e76112",
+          600: "#b94e0e",
+          700: "#8b3a0b",
+          800: "#5c2707",
+          900: "#2e1304",
         },
       }
     : {
@@ -109,15 +141,26 @@ export const tokens = (mode: PaletteMode) => ({
           900: "#f8dcdb",
         },
         blueAccent: {
-          100: "#151632",
-          200: "#2a2d64",
-          300: "#3e4396",
-          400: "#535ac8",
-          500: "#6870fa",
-          600: "#868dfb",
-          700: "#a4a9fc",
-          800: "#c3c6fd",
-          900: "#e1e2fe",
+          100: "#051d33",
+          200: "#0a3a66",
+          300: "#0e5699",
+          400: "#1373cc",
+          500: "#1890ff",
+          600: "#46a6ff",
+          700: "#74bcff",
+          800: "#a3d3ff",
+          900: "#d1e9ff",
+        },
+        orangeAccent: {
+          100: "#2e1304",
+          200: "#5c2707",
+          300: "#8b3a0b",
+          400: "#b94e0e",
+          500: "#e76112",
+          600: "#ec8141",
+          700: "#f1a071",
+          800: "#f5c0a0",
+          900: "#fadfd0",
         },
       }),
 });

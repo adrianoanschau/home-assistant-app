@@ -2,8 +2,8 @@ import { Box, Typography, useTheme } from "@mui/material";
 import { tokens } from "../theme";
 
 type HeaderProps = {
-  title: string;
-  subtitle: string;
+  title: React.ReactNode;
+  subtitle?: React.ReactNode;
 };
 
 export const Header = ({ title, subtitle }: HeaderProps) => {

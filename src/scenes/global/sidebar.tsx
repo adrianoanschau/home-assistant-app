@@ -6,11 +6,16 @@ import {
   MenuItem,
   useProSidebar,
   menuClasses,
+  SubMenu,
 } from "react-pro-sidebar";
 import {
+  Dashboard as DashboardIcon,
   MenuOutlined as MenuIcon,
-  HomeOutlined as HomeIcon,
-  PaidOutlined as IncomesIcon,
+  PointOfSaleOutlined as BudgetIcon,
+  AttachMoneyOutlined as IncomesIcon,
+  MoneyOffOutlined as ExpensesIcon,
+  InsightsOutlined as InvestmentsIcon,
+  IntegrationInstructionsOutlined as IntegrationInstructionsIcon,
 } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { tokens } from "../../theme";
@@ -18,7 +23,7 @@ import { tokens } from "../../theme";
 type ItemProps = {
   title: string;
   to: string;
-  icon: React.ReactNode;
+  icon?: React.ReactNode;
   selected: string;
   setSelected: (title: string) => void;
 };
@@ -40,7 +45,7 @@ const Item = ({ title, to, icon, selected, setSelected }: ItemProps) => {
   );
 };
 
-const Sidebar = () => {
+export const Sidebar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const { collapsed, collapseSidebar } = useProSidebar();
@@ -62,6 +67,10 @@ const Sidebar = () => {
           },
           [`.${menuClasses.active}`]: {
             color: `#6870fa !important`,
+          },
+          [`.${menuClasses.subMenuContent}`]: {
+            backgroundColor: `transparent !important`,
+            paddingLeft: `30px`,
           },
         }}
       >
@@ -129,14 +138,61 @@ const Sidebar = () => {
             <Item
               title="Dashboard"
               to="/"
-              icon={<HomeIcon />}
+              icon={<DashboardIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Orçamento"
+              to="/budget"
+              icon={<BudgetIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="Receitas"
-              to="/incomes"
+              to="/income"
               icon={<IncomesIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <SubMenu label="Despesas" icon={<ExpensesIcon />}>
+              <Item
+                title="Fixas"
+                to="/expenses/fixed"
+                selected={selected}
+                setSelected={setSelected}
+              />
+              <Item
+                title="Variáveis"
+                to="/expenses/variable"
+                selected={selected}
+                setSelected={setSelected}
+              />
+              <Item
+                title="Cartão de Crédito"
+                to="/expenses/credit-card"
+                selected={selected}
+                setSelected={setSelected}
+              />
+              <Item
+                title="Parcelamentos"
+                to="/expenses/installment"
+                selected={selected}
+                setSelected={setSelected}
+              />
+            </SubMenu>
+            <Item
+              title="Investimentos"
+              to="/investments"
+              icon={<InvestmentsIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Integrações"
+              to="/integrations"
+              icon={<IntegrationInstructionsIcon />}
               selected={selected}
               setSelected={setSelected}
             />
@@ -146,5 +202,3 @@ const Sidebar = () => {
     </Box>
   );
 };
-
-export default Sidebar;

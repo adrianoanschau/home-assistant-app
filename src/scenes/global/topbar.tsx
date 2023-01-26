@@ -10,7 +10,7 @@ import {
 } from "@mui/icons-material";
 import { ColorModeContext, tokens } from "../../theme";
 
-const Topbar = () => {
+export const Topbar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const colorMode = useContext(ColorModeContext);
@@ -53,5 +53,3 @@ const Topbar = () => {
     </Box>
   );
 };
-
-export default Topbar;

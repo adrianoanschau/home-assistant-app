@@ -1,1 +1,1 @@
-declare module "ra-jsonapi-client";
+declare module "@nivo/pie";
