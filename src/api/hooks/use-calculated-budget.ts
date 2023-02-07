@@ -204,7 +204,6 @@ export function useCalculatedBudget() {
       incomeValues &&
       fixedExpenseValues &&
       variableExpenseValues &&
-      creditCardExpenseValues &&
       installmentExpenseValues &&
       investmentsValues
     ) {
@@ -212,7 +211,6 @@ export function useCalculatedBudget() {
         incomeValues,
         fixedExpenseValues,
         variableExpenseValues,
-        creditCardExpenseValues,
         installmentExpenseValues,
         investmentsValues
       );
@@ -223,7 +221,6 @@ export function useCalculatedBudget() {
     incomeValues,
     fixedExpenseValues,
     variableExpenseValues,
-    creditCardExpenseValues,
     installmentExpenseValues,
     investmentsValues,
   ]);
